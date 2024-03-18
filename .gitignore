@@ -1,5 +1,7 @@
 # Repo specifc ignore
 .python-version
+couch-potato/__pycache__/
+tests/local_test.py
 
 # Generic ignore
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
