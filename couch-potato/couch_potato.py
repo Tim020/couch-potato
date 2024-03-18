@@ -11,14 +11,15 @@ from _model import BaseModel, make_meta_model
 class CouchPotato:
     __model__: Type[BaseModel] = None
 
-    def __init__(self, cluster: Cluster):
+    def __init__(self, cluster: Cluster, **kwargs):
         self._cluster: Cluster = cluster
         self._models: List[BaseModel] = []
         self._binds: Dict[str, BucketBind] = {}
         self._model_binds: Dict[BaseModel, Collection] = {}
 
         # After init, wait until the cluster is ready
-        self._cluster.wait_until_ready(timeout=timedelta(seconds=5))
+        init_timeout = kwargs.get('init_timeout', 5)
+        self._cluster.wait_until_ready(timeout=timedelta(seconds=init_timeout))
 
     @property
     def Model(self) -> Type[BaseModel]:
