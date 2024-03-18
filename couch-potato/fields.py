@@ -2,12 +2,12 @@ from _types import Field
 
 
 class Integer(Field):
-    _type = int
+    __type__ = int
 
 
 class Float(Field):
-    _type = float
+    __type__ = float
 
 
 class String(Field):
-    _type = str
+    __type__ = str

@@ -1,6 +1,6 @@
 from abc import ABCMeta
 from dataclasses import dataclass, field
-from typing import Dict
+from typing import Dict, Type, Any
 
 from couchbase.bucket import Bucket
 from couchbase.collection import Collection
@@ -20,11 +20,21 @@ class BucketBind:
 
 
 class Field(metaclass=ABCMeta):
+    __type__: Type
+
     def __init__(self, nullable: bool = True):
         self._nullable = nullable
 
-    def serialize(self):
-        raise NotImplementedError
+    @classmethod
+    def ensure_type(cls, value: Any):
+        if not isinstance(value, cls.__type__):
+            raise TypeError(f"Incorrect type for {value}, expected "
+                            f"{cls.__type__} but got {type(value)}")
 
-    def deserialize(self):
-        raise NotImplementedError
+    @classmethod
+    def serialize(cls, value):
+        return value
+
+    @classmethod
+    def deserialize(cls, value):
+        return cls.__type__(value)
