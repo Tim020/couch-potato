@@ -1,10 +1,12 @@
 from string import Formatter
-from typing import Any
+from typing import Any, TypeVar, Type
 
 from couchbase.collection import Collection
 from couchbase.scope import Scope
 
 from errors import ModelAttributeError, FieldNotFound
+
+T = TypeVar('T', bound='BaseModel')
 
 
 class KeyGenerator:
@@ -36,11 +38,11 @@ class BaseModel:
             setattr(self, key, value)
 
     @classmethod
-    def bind(cls) -> "Collection":
+    def bind(cls: Type[T]) -> "Collection":
         raise NotImplementedError("Bind should not be called directly from BaseModel")
 
     @classmethod
-    def get(cls, **kwargs) -> Any:
+    def get(cls: Type[T], **kwargs) -> T:
         if not hasattr(cls, "__fields__"):
             raise Exception("Unable to use model to fetch, as no fields defined")
 
@@ -78,7 +80,7 @@ class BaseModel:
         return new_class
 
     @classmethod
-    def from_json(cls, **kwargs) -> "BaseModel":
+    def from_json(cls: Type[T], **kwargs) -> T:
         # Create an instance of the class
         instance = cls(**kwargs)
         return instance
