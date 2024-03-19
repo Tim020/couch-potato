@@ -22,8 +22,9 @@ class BucketBind:
 class Field(metaclass=ABCMeta):
     __type__: Type
 
-    def __init__(self, nullable: bool = True):
+    def __init__(self, nullable: bool = True, read_only: bool = False):
         self._nullable = nullable
+        self._read_only = read_only
 
     @classmethod
     def ensure_type(cls, value: Any):
@@ -32,6 +33,7 @@ class Field(metaclass=ABCMeta):
                             f"{cls.__type__} but got {type(value)}")
 
     def serialize(self, value):
+        self.ensure_type(value)
         return value
 
     def deserialize(self, value):

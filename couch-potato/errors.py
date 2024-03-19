@@ -8,3 +8,7 @@ class FieldNotFound(ModelError):
 
 class ModelAttributeError(ModelError):
     pass
+
+
+class ReadOnlyError(ModelError):
+    pass

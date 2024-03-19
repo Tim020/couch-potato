@@ -20,6 +20,7 @@ def make_meta_model(cp: "CouchPotato"):
 
             # Set up internal attributes on the class defn
             # 1. Set the __fields__ attribute on the class
+            # TODO: Validate that field names do not conflict with reserved named
             fields: Dict[str, Field] = dict()
             for name, attr in dct.items():
                 if isinstance(attr, Field):
