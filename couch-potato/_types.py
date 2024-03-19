@@ -31,10 +31,9 @@ class Field(metaclass=ABCMeta):
             raise TypeError(f"Incorrect type for {value}, expected "
                             f"{cls.__type__} but got {type(value)}")
 
-    @classmethod
-    def serialize(cls, value):
+    def serialize(self, value):
         return value
 
-    @classmethod
-    def deserialize(cls, value):
-        return cls.__type__(value)
+    def deserialize(self, value):
+        self.ensure_type(value)
+        return value

@@ -13,6 +13,7 @@ from couchbase.auth import PasswordAuthenticator
 from couchbase.cluster import Cluster
 
 from couch_potato.couch_potato import CouchPotato
+from couch_potato.model import KeyGenerator
 from couch_potato.fields import String
 
 cluster = Cluster(
@@ -23,10 +24,11 @@ couch_potato = CouchPotato(cluster)
 
 class UserModel(couch_potato.Model):
     __bucket__ = "test"
+    __key_generator__ = KeyGenerator("User::{name}")
 
     name = String()
 
 if __name__ == "__main__":
-    a: UserModel = UserModel.get("test")
+    a: UserModel = UserModel.get(name="test")
     print(a.name)
 ```

@@ -5,7 +5,8 @@ from couchbase.cluster import Cluster
 from couchbase.collection import Collection
 
 from _types import BucketBind
-from _model import BaseModel, make_meta_model
+from _model import make_meta_model
+from model import BaseModel
 
 
 class CouchPotato:
