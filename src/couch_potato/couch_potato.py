@@ -4,9 +4,9 @@ from typing import Dict, List, Type
 from couchbase.cluster import Cluster
 from couchbase.collection import Collection
 
-from _types import BucketBind
-from _model import make_meta_model
-from model import BaseModel
+from src.couch_potato._types import BucketBind
+from src.couch_potato._model import make_meta_model
+from src.couch_potato.model import BaseModel
 
 
 class CouchPotato:

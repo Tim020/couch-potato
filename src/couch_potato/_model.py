@@ -1,10 +1,10 @@
 from typing import TYPE_CHECKING, Dict
 
-from _types import BucketBind, ScopeBind, Field
-from model import BaseModel, KeyGenerator
+from src.couch_potato._types import BucketBind, ScopeBind, Field
+from src.couch_potato.model import BaseModel, KeyGenerator
 
 if TYPE_CHECKING:
-    from couch_potato import CouchPotato
+    from src.couch_potato.couch_potato import CouchPotato
 
 
 def make_meta_model(cp: "CouchPotato"):

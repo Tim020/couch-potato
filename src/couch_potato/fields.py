@@ -1,4 +1,4 @@
-from _types import Field
+from src.couch_potato._types import Field
 
 
 class Integer(Field):
