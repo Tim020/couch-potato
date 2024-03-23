@@ -34,6 +34,11 @@ style = [
   "black --check --diff {args:.}",
   "isort --check --diff --profile=black {args:.}"
 ]
+fmt = [
+  "black {args:.}",
+  "isort --profile=black {args:.}",
+  "style"
+]
 all = [
   "style",
 ]

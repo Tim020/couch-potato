@@ -12,7 +12,7 @@ Example usage:
 from couchbase.auth import PasswordAuthenticator
 from couchbase.cluster import Cluster
 
-from couch_potato.couch_potato import CouchPotato
+from couch_potato import CouchPotato
 from couch_potato.model import KeyGenerator
 from couch_potato.fields import String, Integer
 
