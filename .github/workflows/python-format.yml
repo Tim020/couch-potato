@@ -2,7 +2,7 @@ name: Python Formatting
 on: [push, pull_request]
 
 concurrency:
-  group: test-${{ github.head_ref }}
+  group: format-${{ github.head_ref }}
   cancel-in-progress: true
 
 env:
