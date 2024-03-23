@@ -32,11 +32,8 @@ dependencies = [
 [envs.lint.scripts]
 style = [
   "black --check --diff {args:.}",
-]
-isort = [
-  "isort --check --diff {args:.}"
+  "isort --check --diff --profile=black {args:.}"
 ]
 all = [
   "style",
-  "isort"
 ]
