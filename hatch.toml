@@ -21,3 +21,17 @@ type = "container"
 
 [[envs.all.matrix]]
 python = ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+[envs.lint]
+detached = true
+dependencies = [
+  "black==24.3.0",
+]
+
+[envs.lint.scripts]
+style = [
+  "black --check --diff {args:.}",
+]
+all = [
+  "style",
+]

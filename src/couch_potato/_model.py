@@ -34,9 +34,13 @@ def make_meta_model(cp: "CouchPotato"):
 
             # 2. Ensure that the model class has a key generator
             if not getattr(new_class, "__key_generator__", None):
-                raise TypeError(f"Model class {name} must have a __key_generator__ attribute")
+                raise TypeError(
+                    f"Model class {name} must have a __key_generator__ attribute"
+                )
             if not isinstance(getattr(new_class, "__key_generator__"), KeyGenerator):
-                raise TypeError(f"Model class {name} __key_generator__ is not a KeyGenerator instance")
+                raise TypeError(
+                    f"Model class {name} __key_generator__ is not a KeyGenerator instance"
+                )
 
             # 3. Ensure that the key generator is made up of valid format parts
             key_generator: KeyGenerator = getattr(new_class, "__key_generator__")
@@ -45,8 +49,10 @@ def make_meta_model(cp: "CouchPotato"):
                 if format_key not in fields:
                     missing_keys.add(format_key)
             if missing_keys:
-                raise TypeError(f"Model class {name}'s KeyGenerator contains keys without "
-                                f"corresponding fields: {list(missing_keys)}")
+                raise TypeError(
+                    f"Model class {name}'s KeyGenerator contains keys without "
+                    f"corresponding fields: {list(missing_keys)}"
+                )
 
             # Set up the binds on the CouchPotato instance
             # 1. Bucket bind
@@ -80,4 +86,5 @@ def make_meta_model(cp: "CouchPotato"):
 
             # Finally, return the new model class
             return new_class
+
     return MetaModel

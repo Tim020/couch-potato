@@ -29,8 +29,10 @@ class Field(metaclass=ABCMeta):
     @classmethod
     def ensure_type(cls, value: Any):
         if not isinstance(value, cls.__type__):
-            raise TypeError(f"Incorrect type for {value}, expected "
-                            f"{cls.__type__} but got {type(value)}")
+            raise TypeError(
+                f"Incorrect type for {value}, expected "
+                f"{cls.__type__} but got {type(value)}"
+            )
 
     def serialize(self, value):
         self.ensure_type(value)

@@ -7,7 +7,7 @@ from couchbase.scope import Scope
 
 from src.couch_potato.errors import ModelAttributeError, FieldNotFound, ReadOnlyError
 
-T = TypeVar('T', bound='BaseModel')
+T = TypeVar("T", bound="BaseModel")
 
 
 class KeyGenerator:
@@ -32,7 +32,9 @@ class BaseModel:
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             if not hasattr(self, key):
-                raise ModelAttributeError(f"Model {self.__name__} does not contain field {key}")
+                raise ModelAttributeError(
+                    f"Model {self.__name__} does not contain field {key}"
+                )
 
             # Ensure the type of the field is correct when setting it
             field = self.__fields__[key]
@@ -99,9 +101,9 @@ class BaseModel:
             raise Exception("Unable to save model, as no fields defined")
 
         serialized = self.to_json()
-        doc_key = self.__key_generator__.generate(**{
-            key: getattr(self, key) for key in self.__key_generator__.format_keys
-        })
+        doc_key = self.__key_generator__.generate(
+            **{key: getattr(self, key) for key in self.__key_generator__.format_keys}
+        )
 
         if hasattr(self, "__cas__"):
             # Updating the document

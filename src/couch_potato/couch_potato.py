@@ -19,12 +19,13 @@ class CouchPotato:
         self._model_binds: Dict[BaseModel, Collection] = {}
 
         # After init, wait until the cluster is ready
-        init_timeout = kwargs.get('init_timeout', 5)
+        init_timeout = kwargs.get("init_timeout", 5)
         self._cluster.wait_until_ready(timeout=timedelta(seconds=init_timeout))
 
     @property
     def Model(self) -> Type[BaseModel]:
         if self.__model__ is None:
+
             class _Model(BaseModel, metaclass=make_meta_model(self)):
                 @classmethod
                 def bind(cls) -> Collection:
