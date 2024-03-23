@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name="couch_potato"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.7"
+license-files = { paths = ["LICENSE.md"] }
+authors = [
+  { name = "Tim Bradgate", email = "timbradgate@hotmail.co.uk" },
+]
+keywords=["couchbase", "odm", "orm"]
+classifiers=[
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Topic :: Database",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Software Development :: Libraries :: Python Modules"
+]
+dependencies = [
+  "couchbase>4"
+]
+
+[project.urls]
+Documentation = "https://github.com/Tim020/couch-potato"
+"Source code" = "https://github.com/Tim020/couch-potato"
+Issues = "https://github.com/Tim020/couch-potato/issues"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/couch_potato/_version.py"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "dist"
+]

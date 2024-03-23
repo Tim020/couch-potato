@@ -5,7 +5,7 @@ from couchbase.collection import Collection
 from couchbase.options import InsertOptions, ReplaceOptions
 from couchbase.scope import Scope
 
-from errors import ModelAttributeError, FieldNotFound, ReadOnlyError
+from src.couch_potato.errors import ModelAttributeError, FieldNotFound, ReadOnlyError
 
 T = TypeVar('T', bound='BaseModel')
 
