@@ -1,3 +1,4 @@
 pytest
 black==24.3.0
+isort==5.13.2
 coverage[toml]>=6.5

@@ -26,12 +26,17 @@ python = ["3.7", "3.8", "3.9", "3.10", "3.11"]
 detached = true
 dependencies = [
   "black==24.3.0",
+  "isort==5.13.2"
 ]
 
 [envs.lint.scripts]
 style = [
   "black --check --diff {args:.}",
 ]
+isort = [
+  "isort --check --diff {args:.}"
+]
 all = [
   "style",
+  "isort"
 ]

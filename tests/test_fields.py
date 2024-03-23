@@ -1,15 +1,15 @@
 from datetime import datetime
-from typing import Type, Any
+from typing import Any, Type
 
 import pytest
 
 from src.couch_potato._types import Field
 from src.couch_potato.fields import (
-    Float,
-    String,
-    Integer,
     Boolean,
     DateTime,
+    Float,
+    Integer,
+    String,
     TypedArray,
 )
 

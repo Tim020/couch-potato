@@ -1,6 +1,6 @@
 from abc import ABCMeta
 from dataclasses import dataclass, field
-from typing import Dict, Type, Any
+from typing import Any, Dict, Type
 
 from couchbase.bucket import Bucket
 from couchbase.collection import Collection

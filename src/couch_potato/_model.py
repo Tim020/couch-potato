@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, Dict
 
 from couch_potato._context import MODEL_CREATE_CONTEXT
-from src.couch_potato._types import BucketBind, ScopeBind, Field
+from src.couch_potato._types import BucketBind, Field, ScopeBind
 from src.couch_potato.model import BaseModel, KeyGenerator
 
 if TYPE_CHECKING:
