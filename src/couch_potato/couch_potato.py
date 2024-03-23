@@ -4,6 +4,7 @@ from typing import Dict, List, Type
 from couchbase.cluster import Cluster
 from couchbase.collection import Collection
 
+from couch_potato._context import model_create_context
 from src.couch_potato._types import BucketBind
 from src.couch_potato._model import make_meta_model
 from src.couch_potato.model import BaseModel
@@ -25,11 +26,12 @@ class CouchPotato:
     @property
     def Model(self) -> Type[BaseModel]:
         if self.__model__ is None:
+            with model_create_context():
 
-            class _Model(BaseModel, metaclass=make_meta_model(self)):
-                @classmethod
-                def bind(cls) -> Collection:
-                    return self.model_binds[cls]
+                class _Model(BaseModel, metaclass=make_meta_model(self)):
+                    @classmethod
+                    def bind(cls) -> Collection:
+                        return self.model_binds[cls]
 
             self.__model__ = _Model
         return self.__model__

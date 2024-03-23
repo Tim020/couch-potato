@@ -25,7 +25,8 @@ classifiers=[
   "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 dependencies = [
-  "couchbase>4"
+  "couchbase>4",
+  "contextvars"
 ]
 
 [project.urls]

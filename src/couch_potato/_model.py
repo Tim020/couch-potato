@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING, Dict
 
+from couch_potato._context import MODEL_CREATE_CONTEXT
 from src.couch_potato._types import BucketBind, ScopeBind, Field
 from src.couch_potato.model import BaseModel, KeyGenerator
 
@@ -13,10 +14,13 @@ def make_meta_model(cp: "CouchPotato"):
             new_class = super().__new__(cls, name, bases, dct)
 
             # BaseModel instantiation
-            if len(bases) == 0:
-                return new_class
-            if len(bases) == 1 and bases[0] is BaseModel:
-                return new_class
+            try:
+                ctx = MODEL_CREATE_CONTEXT.get()
+            except LookupError:
+                pass
+            else:
+                if not ctx.add_to_registry:
+                    return new_class
 
             # Set up internal attributes on the class defn
             # 1. Set the __fields__ attribute on the class
