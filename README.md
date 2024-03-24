@@ -9,12 +9,14 @@ Inspired in part by SQLAlchemy.
 Example usage:
 
 ```python
+from datetime import datetime
+
 from couchbase.auth import PasswordAuthenticator
 from couchbase.cluster import Cluster
 
 from couch_potato import CouchPotato
-from couch_potato.model import KeyGenerator
-from couch_potato.fields import String, Integer
+from couch_potato.model import KeyGenerator, Model
+from couch_potato.fields import DateTime, EmbeddedModel, Integer, String
 
 cluster = Cluster(
     'couchbase://localhost',
@@ -22,19 +24,31 @@ cluster = Cluster(
 )
 couch_potato = CouchPotato(cluster)
 
+class SomeModel(Model):
+    some_number = Integer()
+
+
 class UserModel(couch_potato.Model):
     __bucket__ = "test"
     __key_generator__ = KeyGenerator("User::{name}")
 
     name = String()
     age = Integer()
+    created_at = DateTime()
+    some_model = EmbeddedModel(SomeModel)
+
 
 if __name__ == "__main__":
-    # Get the model from the database
-    a: UserModel = UserModel.get(name="test")
-    print(a.name, a.age)
-    # Update one of the instance attributes, and save the model
-    a.age = 30
-    a.save()
-
+    # Create a new instance of a model
+    user = UserModel(
+        name="Tim", 
+        age=27, 
+        created_at=datetime.utcnow(), 
+        some_model=SomeModel(some_number=123)
+    )
+    user.save()
+    # Get that instance, update a value, and save ir
+    user = UserModel.get(name="Tim")
+    user.some_model.foo = 321
+    user.save()
 ```
