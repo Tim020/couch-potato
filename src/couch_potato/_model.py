@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from src.couch_potato import CouchPotato
     from src.couch_potato.model import KeyGenerator
 
-T = TypeVar("T", bound="BaseModel")
+T = TypeVar("T", bound="BoundModel")
 
 
 class ModelMeta(type):
@@ -123,6 +123,13 @@ class BaseModel:
             field = self.__fields__[key]
             field.ensure_type(value)
             setattr(self, key, value)
+
+    @property
+    def __dict__(self):
+        cls_dict = {}
+        for _key, field in self.__fields__.items():
+            cls_dict[_key] = getattr(self, _key)
+        return cls_dict
 
     @classmethod
     def from_json(cls: Type[T], **kwargs) -> T:

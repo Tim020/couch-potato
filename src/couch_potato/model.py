@@ -17,3 +17,8 @@ class KeyGenerator:
 
 class Model(BaseModel, metaclass=ModelMeta):
     __read_only__: bool = False
+
+    def __eq__(self, other):
+        if not isinstance(other, Model):
+            return False
+        return self.__dict__ == other.__dict__
